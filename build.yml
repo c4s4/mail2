@@ -8,6 +8,7 @@ properties:
   BUILD_DIR: 'build'
   ARC_DIR:   '#{BUILD_DIR}/#{NAME}-#{VERSION}'
   DEPENDENCIES:
+  - "github.com/mitchellh/gox"
   - 'github.com/jordan-wright/email'
 
 targets:
