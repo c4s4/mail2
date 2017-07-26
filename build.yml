@@ -4,5 +4,5 @@ extends: c4s4/build/go-tool.yml
 
 properties:
   LIBRARIES:
-  - "github.com/mitchellh/gox"
+  - 'github.com/mitchellh/gox'
   - 'github.com/jordan-wright/email'
