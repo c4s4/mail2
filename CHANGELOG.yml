@@ -1,5 +1,9 @@
 # Semantic Change Log (http://github.com/c4s4/changelog)
 
+- version: 1.1.1
+  date:    2018-07-18
+  summary: Fixed code warnings and build file
+
 - version: 1.1.0
   date:    2017-04-21
   summary: Added features
