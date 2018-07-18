@@ -35,7 +35,8 @@ func List(list string) []string {
 // - user: SMTP server user name.
 // - password: the SMTP server password.
 // - html: tells if email is HTML.
-func SendMail(server, from, to, cc, bcc, subject, text, attach, user, pass string, html bool) error {
+// - withTLS: tells if we should call server with TLS.
+func SendMail(server, from, to, cc, bcc, subject, text, attach, user, pass string, html, withTLS bool) error {
 	mail := email.NewEmail()
 	mail.From = from
 	mail.To = List(to)
@@ -60,7 +61,14 @@ func SendMail(server, from, to, cc, bcc, subject, text, attach, user, pass strin
 	var auth smtp.Auth
 	if user != "" {
 		host := server[:strings.LastIndex(server, ":")]
-		auth = smtp.PlainAuth("", user, pass, host)
+		if withTLS {
+			auth = smtp.CRAMMD5Auth(user, pass)
+		} else {
+			auth = smtp.PlainAuth("", user, pass, host)
+		}
+	}
+	if withTLS {
+		return mail.SendWithTLS(server, auth, nil)
 	}
 	return mail.Send(server, auth)
 }
@@ -76,9 +84,10 @@ func main() {
 	attach := flag.String("attach", "", "file to attach to the mail")
 	user := flag.String("user", "", "user name for authentication")
 	pass := flag.String("pass", "", "user password for authentication")
+	tls := flag.Bool("tls", false, "send email with TLS")
 	flag.Parse()
 	text := strings.Join(flag.Args(), " ")
-	err := SendMail(*smtp, *from, *to, *cc, *bcc, *subject, text, *attach, *user, *pass, *html)
+	err := SendMail(*smtp, *from, *to, *cc, *bcc, *subject, text, *attach, *user, *pass, *html, *tls)
 	if err != nil {
 		println(fmt.Sprintf("ERROR sending mail: %v", err))
 		os.Exit(1)
