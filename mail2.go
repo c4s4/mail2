@@ -5,12 +5,16 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/jordan-wright/email"
 	"net/smtp"
 	"os"
 	"strings"
+
+	"github.com/jordan-wright/email"
 )
 
+// List makes a slice from a coma separated list:
+// - list: coma separated list
+// Return: list as a slice.
 func List(list string) []string {
 	result := strings.Split(list, ",")
 	for index, element := range result {
@@ -19,6 +23,18 @@ func List(list string) []string {
 	return result
 }
 
+// SendMail sends an email:
+// - server: the SMTP server address (such as 'smtp.orange.fr:25')
+// - from: the email sender (such as 'test@example.com').
+// - to: the email recipient(s) as a coma separated list.
+// - cc: carbon copy recipient(s) as a coma separated list.
+// - bcc: blind carbon copy recipient(s) as a coma separated list.
+// - subject: the email subject.
+// - text: the email text.
+// - attach: email attachment as a file path.
+// - user: SMTP server user name.
+// - password: the SMTP server password.
+// - html: tells if email is HTML.
 func SendMail(server, from, to, cc, bcc, subject, text, attach, user, pass string, html bool) error {
 	mail := email.NewEmail()
 	mail.From = from
