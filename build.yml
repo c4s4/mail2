@@ -5,3 +5,13 @@ default: [fmt, check, test]
 expose:  [fmt, check, test, release]
 configuration: '~/.neon/github.yml'
 # GITHUB_TOKEN: 'abcdefghijklmnopqrstuvwxyz0123456789'
+
+targets:
+
+  test:
+    doc: Run Go tests
+    steps:
+    - prompt: 'Password'
+      to:     password
+    - 'setenv("MAIL_PASSWORD", password)'
+    - super:
