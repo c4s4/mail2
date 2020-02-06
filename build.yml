@@ -1,8 +1,7 @@
-# NeON Build File (http://github.com/c4s4/neon)
+# NeON build file (http://github.com/c4s4/neon)
 
-extends:
-- c4s4/build/golang.yml
-
-properties:
-  LIBRARIES:
-  - 'github.com/jordan-wright/email'
+extends: golang
+default: [fmt, check, test]
+expose:  [fmt, check, test, release]
+configuration: '~/.neon/github.yml'
+# GITHUB_TOKEN: 'abcdefghijklmnopqrstuvwxyz0123456789'
