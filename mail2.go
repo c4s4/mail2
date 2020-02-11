@@ -59,7 +59,11 @@ func SendMail(server, from, to, cc, bcc, subject, text, attach, user, pass strin
 	}
 	var auth smtp.Auth
 	if user != "" {
-		host := server[:strings.LastIndex(server, ":")]
+		index := strings.LastIndex(server, ":")
+		if index == -1 {
+			return fmt.Errorf("smtp must be like hostname:port, no port found")
+		}
+		host := server[:index]
 		auth = smtp.PlainAuth("", user, pass, host)
 	}
 	return mail.Send(server, auth)
