@@ -6,9 +6,13 @@ import (
 )
 
 func TestSendMail(t *testing.T) {
-	err := SendMail("smtp.gmail.com:25", "michel.casabianca@gmail.com",
-		"michel.casabianca@gmail.com", "", "", "Test", "This is a test!",
-		"mail2.go", "michel.casabianca", os.Getenv("MAIL_PASSWORD"), false)
+	err := SendMail(os.Getenv("MAIL_SMTP"),
+					os.Getenv("MAIL_RECIPIENT"),
+					os.Getenv("MAIL_RECIPIENT"),
+					"", "", "Test", "This is a test!", "mail2.go",
+					os.Getenv("MAIL_USERNAME"),
+					os.Getenv("MAIL_PASSWORD"),
+					false)
 	if err != nil {
 		t.Fatalf("Error sending email: %v", err)
 	}

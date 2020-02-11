@@ -11,7 +11,5 @@ targets:
   test:
     doc: Run Go tests
     steps:
-    - prompt: 'Password'
-      to:     password
-    - 'setenv("MAIL_PASSWORD", password)'
+    - dotenv: '~/.env/gmail.env'
     - super:
