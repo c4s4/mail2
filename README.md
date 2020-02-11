@@ -1,5 +1,33 @@
-Mail2
-=====
+# Mail2
+
+- Project :   <https://github.com/c4s4/mail2>.
+- Downloads : <https://github.com/c4s4/mail2/releases>.
+
+Mail2 is a tool to send email on command line.
+
+## Installation
+
+### Unix users (Linux, BSDs and MacOSX)
+
+Unix users may download and install latest Mail2 release with command:
+
+```bash
+sh -c "$(curl http://sweetohm.net/dist/mail2/install)"
+```
+
+If *curl* is not installed on you system, you might run:
+
+```bash
+sh -c "$(wget -O - http://sweetohm.net/dist/mail2/install)"
+```
+
+**Note:** Some directories are protected, even as *root*, on **MacOSX** (since *El Capitan* release), thus you can't install NeON in */usr/bin* for instance.
+
+### Binary package
+
+Otherwise, you can download latest binary archive at <https://github.com/c4s4/mail2/releases>. Unzip the archive, put the binary of your platform somewhere in your *PATH* and rename it *mail2*.
+
+## Usage
 
 This is a simple tool to send emails from command with an SMTP server. Thus
 you could type:
